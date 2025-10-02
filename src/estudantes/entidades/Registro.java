@@ -1,15 +1,24 @@
 package estudantes.entidades;
 
+import professor.entidades.CodigoCurso;
+
 /*
 * @author Rodrigo Thoma da Silva
+* @author Fade Hassan Husein Kanaan
  */
 public class Registro extends DocumentoAcademico {
     private String estudante;
     private long matricula;
     
-     public void construtor(){
+     public Registro(String estudante, long matricula, long autenticacao, String criador, CodigoCurso codigoCurso, int paginas){
+         super(autenticacao, criador, codigoCurso, paginas);
+         this.estudante = estudante;
     }
-    
+
+    public Registro(){
+         super();
+    }
+
     public void getters(){
     }
     

@@ -1,12 +1,21 @@
 package estudantes.entidades;
 
+import professor.entidades.CodigoCurso;
+
 /*
 * @author Rodrigo Thoma da Silva
+* @author Fade Hassan Husein Kanaan
  */
 public class Circular extends Deliberacao {
     private String[] destinatarios;
     
-    public void construtor(){
+    public Circular(String[] destinatarios, String texto, String criador, CodigoCurso codigoCurso, int paginas){
+        super(texto, criador, codigoCurso, paginas);
+        this.destinatarios = destinatarios;
+    }
+
+    public Circular(){
+        super();
     }
      
      public void getters(){

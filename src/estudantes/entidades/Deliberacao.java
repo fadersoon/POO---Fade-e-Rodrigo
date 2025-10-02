@@ -1,12 +1,21 @@
 package estudantes.entidades;
 
+import professor.entidades.CodigoCurso;
+
 /*
 * @author Rodrigo Thoma da Silva
+* @author Fade Hassan Husein Kanaan
  */
 public class Deliberacao extends DocumentoAdministrativo {
     private String texto;
     
-     public void construtor(){
+     public Deliberacao(String texto, String criador, CodigoCurso codigoCurso, int paginas){
+         super(criador, codigoCurso, paginas);
+         this.texto = texto;
+    }
+
+    public Deliberacao(){
+         super();
     }
      
      public void getters(){
