@@ -1,6 +1,7 @@
 
 package estudantes.entidades;
 
+import java.util.Arrays;
 import professor.entidades.CodigoCurso;
 
 /*
