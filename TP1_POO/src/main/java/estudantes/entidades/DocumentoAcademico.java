@@ -2,6 +2,8 @@ package estudantes.entidades;
 
 import professor.entidades.CodigoCurso;
 
+import java.util.Objects;
+
 /*
  * @author Rodrigo Thoma da Silva
  * @author Fade Hassan Husein Kanaan
@@ -44,6 +46,7 @@ public class DocumentoAcademico extends Documento {
     }
 
     public int hashCode() {
+        return Objects.hash(super.hashCode(), this.autenticacao);
     }
 
 }

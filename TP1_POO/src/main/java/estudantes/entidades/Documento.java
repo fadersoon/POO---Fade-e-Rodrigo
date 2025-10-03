@@ -2,6 +2,8 @@ package estudantes.entidades;
 
 import professor.entidades.CodigoCurso;
 
+import java.util.Objects;
+
 /*
  * Classe que representa um documento genérico.
  * @author Rodrigo Thoma da Silva
@@ -53,5 +55,6 @@ public abstract class Documento {
     }
 
     public int hashCode() {
+        return Objects.hash(criador, codigoCurso, paginas);
     }
 }

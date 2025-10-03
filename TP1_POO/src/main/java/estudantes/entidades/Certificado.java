@@ -24,6 +24,7 @@ public class Certificado extends Registro {
     }
 
     public boolean equals(Object o) {
+        return false;
     }
 
     public int hashCode() {

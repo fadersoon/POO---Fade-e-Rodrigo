@@ -31,6 +31,7 @@ public class Atestado extends Registro {
 
     @Override
     public boolean equals(Object o) {
+        return false;
     }
 
     public int hashCode() {

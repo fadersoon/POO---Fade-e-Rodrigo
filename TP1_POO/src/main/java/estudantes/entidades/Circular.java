@@ -23,6 +23,7 @@ public class Circular extends Deliberacao {
     }
 
     public boolean equals(Object o) {
+        return false;
     }
 
     public int hashCode() {

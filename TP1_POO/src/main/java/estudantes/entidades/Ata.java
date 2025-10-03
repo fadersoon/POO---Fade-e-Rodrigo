@@ -1,6 +1,7 @@
 package estudantes.entidades;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 import professor.entidades.CodigoCurso;
 
@@ -57,6 +58,9 @@ public class Ata extends Documento {
     }
 
     public int hashCode() {
+        int result = Objects.hash(super.hashCode(), numero, texto);
+        result = 31 * result + Arrays.hashCode(presentes);
+        return result;
     }
 
 
