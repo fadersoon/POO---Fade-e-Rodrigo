@@ -16,7 +16,22 @@ public class DocumentoAdministrativo extends Documento {
         super();
     }
     
-    public boolean equals(Object o){
+    @Override
+       public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null) {
+            return false;
+        }
+        if (this.getClass() != o.getClass()) {
+            return false;
+        }
+        if(!super.equals(o)){
+            return false;
+        }
+        DocumentoAcademico documentoAcademico = (DocumentoAcademico) o;
+        return false;
     }
     
     public int hashCode(){
