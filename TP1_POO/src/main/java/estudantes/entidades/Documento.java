@@ -34,8 +34,23 @@ public abstract class Documento {
         return paginas;
     }
     
-   public boolean equals(Object o){
-   }
+   @Override
+       public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null) {
+            return false;
+        }
+        if (this.getClass() != o.getClass()) {
+            return false;
+        }
+        Documento documento = (Documento) o;
+        if (this.criador.equals(documento.criador) && this.codigoCurso.equals(documento.codigoCurso) && this.paginas==documento.paginas ) {
+            return true;
+        }
+        return false;
+    }
    
    public int hashCode(){
    }
