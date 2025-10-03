@@ -35,7 +35,24 @@ public class Ata extends Documento {
     
     @Override
        public boolean equals(Object o) {
-       }
+        if (this == o) {
+            return true;
+        }
+        if (o == null) {
+            return false;
+        }
+        if (this.getClass() != o.getClass()) {
+            return false;
+        }
+        if(!super.equals(o)){
+            return false;
+        }
+        Ata ata = (Ata) o;
+        if (this.numero==ata.numero && this.texto.equals(ata.texto) && Arrays.equals(this.presentes,ata.presentes) ) {
+            return true;
+        }
+        return false;
+    }
     
     public int hashCode(){
     }
