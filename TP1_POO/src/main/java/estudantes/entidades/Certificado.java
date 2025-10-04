@@ -11,9 +11,9 @@ import java.util.Objects;
 public class Certificado extends Registro {
     private String descricao;
 
-    public Certificado(String estudante, long matricula, long autenticacao,
-                       String criador, CodigoCurso codigoCurso, int paginas, String descricao) {
-        super(autenticacao, criador, codigoCurso, paginas, estudante, matricula);
+    public Certificado(String criador, CodigoCurso codigoCurso, int paginas,
+                       long autenticacao, String estudante, long matricula, String descricao) {
+        super(criador, codigoCurso, paginas, autenticacao, estudante, matricula);
         this.descricao = descricao;
     }
 

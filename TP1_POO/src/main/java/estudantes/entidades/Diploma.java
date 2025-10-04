@@ -11,9 +11,9 @@ import java.util.Objects;
 public class Diploma extends Certificado {
     private String habilitacao;
 
-    public Diploma(String descricao, String estudante, long matricula, long autenticacao,
-                   String criador, CodigoCurso codigoCurso, int paginas, String habilitacao) {
-        super(estudante, matricula, autenticacao, criador, codigoCurso, paginas, descricao);
+    public Diploma(String criador, CodigoCurso codigoCurso, int paginas,  long matricula, String descricao, long autenticacao, String estudante,
+                   String habilitacao) {
+        super(criador, codigoCurso, paginas, autenticacao, estudante, matricula, descricao);
         this.habilitacao = habilitacao;
     }
 

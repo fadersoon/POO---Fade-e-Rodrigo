@@ -12,9 +12,9 @@ public class Atestado extends Registro {
     private String descricao;
     private String categoria;
 
-    public Atestado(String estudante, long matricula, long autenticacao, String criador,
-                    CodigoCurso codigoCurso, int paginas, String descricao, String categoria) {
-        super(autenticacao, criador, codigoCurso, paginas, estudante, matricula);
+    public Atestado(String criador, CodigoCurso codigoCurso, int paginas, long matricula, String estudante, long autenticacao,
+                    String descricao, String categoria) {
+        super(criador, codigoCurso, paginas, autenticacao, estudante, matricula);
         this.descricao = descricao;
         this.categoria = categoria;
     }

@@ -12,7 +12,7 @@ import java.util.Objects;
 public class Circular extends Deliberacao {
     private String[] destinatarios;
 
-    public Circular(String texto, String criador, CodigoCurso codigoCurso, int paginas, String[] destinatarios) {
+    public Circular(String criador, CodigoCurso codigoCurso, int paginas, String texto, String[] destinatarios) {
         super(criador, codigoCurso, paginas, texto);
         this.destinatarios = destinatarios;
     }

@@ -13,9 +13,9 @@ public class Historico extends Registro {
     private double coeficiente;
     private String[] componentes;
 
-    public Historico(String estudante, long matricula, long autenticacao, String criador,
-                     CodigoCurso codigoCurso, int paginas, double coeficiente, String[] componentes) {
-        super(autenticacao, criador, codigoCurso, paginas, estudante, matricula);
+    public Historico(String criador, CodigoCurso codigoCurso, int paginas, long matricula, String estudante,  long autenticacao,
+                     double coeficiente, String[] componentes) {
+        super(criador, codigoCurso, paginas, autenticacao, estudante, matricula);
         this.coeficiente = coeficiente;
     }
 

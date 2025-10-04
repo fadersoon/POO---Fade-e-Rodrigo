@@ -12,7 +12,7 @@ public class Registro extends DocumentoAcademico {
     private String estudante;
     private long matricula;
 
-    public Registro(long autenticacao, String criador, CodigoCurso codigoCurso, int paginas, String estudante, long matricula) {
+    public Registro(String criador, CodigoCurso codigoCurso, int paginas, long autenticacao, String estudante, long matricula) {
         super(criador, codigoCurso, paginas, autenticacao);
         this.estudante = estudante;
         this.matricula = matricula;
