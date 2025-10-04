@@ -35,10 +35,13 @@ public class Historico extends Registro {
     public boolean equals(Object o) {
         if (this == o)
             return true;
+
         if (this == null)
             return false;
+
         if (this.getClass() != o.getClass())
             return false;
+
         Historico historico = (Historico) o;
         if (historico.coeficiente == this.coeficiente && Arrays.equals(historico.componentes, this.componentes) && historico.getAutenticacao() == this.getAutenticacao()
             && historico.getCriador().equals(this.getCriador()) && historico.getCodigoCurso().equals(this.getCodigoCurso()) && historico.getPaginas() == this.getPaginas()

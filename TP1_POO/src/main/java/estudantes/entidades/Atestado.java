@@ -42,10 +42,10 @@ public class Atestado extends Registro {
         if (this.getClass() != o.getClass())
             return false;
 
-        Atestado atestado = (Atestado) o;
-        if (!super.equals(atestado))
+        if (!super.equals(o))
             return false;
 
+        Atestado atestado = (Atestado) o;
         if (atestado.descricao.equals(this.descricao) && atestado.categoria.equals(this.categoria))
             return true;
         return false;

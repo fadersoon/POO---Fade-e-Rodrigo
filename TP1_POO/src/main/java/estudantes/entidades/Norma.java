@@ -40,10 +40,13 @@ public class Norma extends DocumentoAdministrativo {
     public boolean equals(Object o) {
         if (this == o)
             return true;
+
         if (this == null)
             return false;
+
         if (this.getClass() != o.getClass())
             return false;
+
         Norma norma = (Norma) o;
         if (norma.numero == this.numero && norma.valido == this.valido && norma.texto.equals(this.texto) && norma.getCriador().equals(this.getCriador())
             && norma.getCodigoCurso().equals(this.getCodigoCurso()) && norma.getPaginas() == this.getPaginas())

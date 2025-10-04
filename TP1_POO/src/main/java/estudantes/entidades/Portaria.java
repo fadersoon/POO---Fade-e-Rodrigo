@@ -28,10 +28,13 @@ public class Portaria extends Norma {
     public boolean equals(Object o) {
         if (this == o)
             return true;
+
         if (this == null)
             return false;
+
         if (this.getClass() != o.getClass())
             return false;
+
         Portaria portaria = (Portaria) o;
         if (portaria.anoInicio == this.anoInicio && portaria.getCriador().equals(this.getCriador()) && portaria.getCodigoCurso().equals(this.getCodigoCurso())
                 && portaria.getPaginas() == this.getPaginas() && portaria.getNumero() == this.getNumero() &&  portaria.getValido() == this.getValido()

@@ -36,10 +36,11 @@ public class Certificado extends Registro {
         if (this.getClass() != o.getClass())
             return false;
 
-        Certificado certificado = (Certificado) o;
-        if (!super.equals(certificado))
+
+        if (!super.equals(o))
             return false;
 
+        Certificado certificado = (Certificado) o;
         if (certificado.descricao.equals(this.descricao))
             return true;
         return false;

@@ -35,10 +35,10 @@ public class Deliberacao extends DocumentoAdministrativo {
             if (this.getClass() != o.getClass())
                 return false;
 
-            Deliberacao deliberacao = (Deliberacao) o;
-            if (!super.equals(deliberacao))
+            if (!super.equals(o))
                 return false;
 
+            Deliberacao deliberacao = (Deliberacao) o;
             if (deliberacao.texto.equals(this.texto))
                 return true;
             return false;

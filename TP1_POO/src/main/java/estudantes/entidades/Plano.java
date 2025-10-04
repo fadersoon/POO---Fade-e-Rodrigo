@@ -34,10 +34,13 @@ public class Plano extends DocumentoAcademico {
     public boolean equals(Object o) {
         if (this == o)
             return true;
+
         if (this == null)
             return false;
+
         if (this.getClass() != o.getClass())
             return false;
+
         Plano plano = (Plano) o;
         if (plano.responsavel.equals(this.responsavel) && Arrays.equals(plano.planejamento, this.planejamento) && plano.getCriador().equals(this.getCriador())
         && plano.getCodigoCurso().equals(this.getCodigoCurso()) && plano.getPaginas() == this.getPaginas() && plano.getAutenticacao() == this.getAutenticacao())

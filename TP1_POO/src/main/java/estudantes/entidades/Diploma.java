@@ -29,10 +29,13 @@ public class Diploma extends Certificado {
     public boolean equals(Object o) {
         if (this == o)
             return true;
+
         if (this == null)
             return false;
+
         if (this.getClass() != o.getClass())
             return false;
+
         Diploma diploma = (Diploma) o;
         if (diploma.habilitacao.equals(this.habilitacao) && diploma.getEstudante().equals(this.getEstudante()) && diploma.getMatricula() == this.getMatricula()
             && diploma.getAutenticacao() == this.getAutenticacao() && diploma.getCriador().equals(this.getCriador()) && diploma.getCodigoCurso().equals(this.getCodigoCurso())

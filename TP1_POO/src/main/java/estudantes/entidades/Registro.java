@@ -34,10 +34,13 @@ public class Registro extends DocumentoAcademico {
     public boolean equals(Object o) {
         if (this == o)
             return true;
+
         if (this == null)
             return false;
+
         if (this.getClass() != o.getClass())
             return false;
+
         Registro registro = (Registro) o;
         if (registro.estudante.equals(this.estudante) && registro.matricula == this.matricula && registro.getAutenticacao() == this.getAutenticacao()
         && registro.getCriador().equals(this.getCriador()) && registro.getCodigoCurso().equals(this.getCodigoCurso()) && registro.getPaginas() == this.getPaginas())

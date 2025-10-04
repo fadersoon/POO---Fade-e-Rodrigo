@@ -28,10 +28,13 @@ public class Oficio extends Deliberacao {
     public boolean equals(Object o) {
         if (this == o)
             return true;
+
         if (this == null)
             return false;
+
         if (this.getClass() != o.getClass())
             return false;
+
         Oficio oficio = (Oficio) o;
         if (oficio.destinatario.equals(this.destinatario) && oficio.getCriador().equals(this.getCriador()) && oficio.getCodigoCurso().equals(this.getCodigoCurso())
         && oficio.getPaginas() == this.getPaginas() && oficio.getTexto().equals(this.getTexto()))

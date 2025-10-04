@@ -29,10 +29,13 @@ public class Edital extends Norma {
     public boolean equals(Object o) {
         if (this == o)
             return true;
+
         if (this == null)
             return false;
+
         if (this.getClass() != o.getClass())
             return false;
+
         Edital edital = (Edital) o;
         if (Arrays.equals(edital.responsaveis, this.responsaveis) && edital.getCriador().equals(this.getCriador()) && edital.getCodigoCurso().equals(this.getCodigoCurso())
             && edital.getPaginas() == this.getPaginas() && edital.getNumero() == this.getNumero() && edital.getValido() == this.getValido() && edital.getTexto().equals(this.getTexto()))

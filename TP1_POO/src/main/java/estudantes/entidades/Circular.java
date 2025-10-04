@@ -36,10 +36,10 @@ public class Circular extends Deliberacao {
         if (this.getClass() != o.getClass())
             return false;
 
-        Circular circular = (Circular) o;
-        if (!super.equals(circular))
+        if (!super.equals(o))
             return false;
 
+        Circular circular = (Circular) o;
         if (Arrays.equals(circular.destinatarios, this.destinatarios))
             return true;
         return false;
