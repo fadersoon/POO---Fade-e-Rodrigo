@@ -1,4 +1,6 @@
 package estudantes.entidades;
+import java.util.Arrays;
+import java.util.Objects;
 
 import professor.entidades.CodigoCurso;
 
@@ -11,7 +13,7 @@ public class Plano extends DocumentoAcademico {
     private String[] planejamento;
 
     public Plano(long autenticacao, String criador, CodigoCurso codigoCurso, int paginas, String responsavel, String[] planejamento) {
-        super(autenticacao, criador, codigoCurso, paginas);
+        super(criador, codigoCurso, paginas, autenticacao);
         this.responsavel = responsavel;
         this.planejamento = planejamento;
     }
@@ -28,10 +30,25 @@ public class Plano extends DocumentoAcademico {
         return planejamento;
     }
 
+    @Override
     public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (this == null)
+            return false;
+        if (this.getClass() != o.getClass())
+            return false;
+        Plano plano = (Plano) o;
+        if (plano.responsavel.equals(this.responsavel) && Arrays.equals(plano.planejamento, this.planejamento) && plano.getCriador().equals(this.getCriador())
+        && plano.getCodigoCurso().equals(this.getCodigoCurso()) && plano.getPaginas() == this.getPaginas() && plano.getAutenticacao() == this.getAutenticacao())
+            return true;
+        return false;
     }
 
+    @Override
     public int hashCode() {
+        int hash = Objects.hash(super.hashCode(), responsavel);
+        hash = 31 * hash + Arrays.hashCode(planejamento);
+        return hash;
     }
-
 }

@@ -2,6 +2,8 @@ package estudantes.entidades;
 
 import professor.entidades.CodigoCurso;
 
+import java.util.Objects;
+
 /*
  * @author Rodrigo Thoma da Silva
  * @author Fade Hassan Husein Kanaan
@@ -12,7 +14,7 @@ public class Atestado extends Registro {
 
     public Atestado(String estudante, long matricula, long autenticacao, String criador,
                     CodigoCurso codigoCurso, int paginas, String descricao, String categoria) {
-        super(estudante, matricula, autenticacao, criador, codigoCurso, paginas);
+        super(autenticacao, criador, codigoCurso, paginas, estudante, matricula);
         this.descricao = descricao;
         this.categoria = categoria;
     }
@@ -31,10 +33,26 @@ public class Atestado extends Registro {
 
     @Override
     public boolean equals(Object o) {
+        if (this == o)
+            return true;
+
+        if (o == null)
+            return false;
+
+        if (this.getClass() != o.getClass())
+            return false;
+
+        Atestado atestado = (Atestado) o;
+        if (!super.equals(atestado))
+            return false;
+
+        if (atestado.descricao.equals(this.descricao) && atestado.categoria.equals(this.categoria))
+            return true;
         return false;
     }
 
+    @Override
     public int hashCode() {
+        return Objects.hash(super.hashCode(), descricao, categoria);
     }
-
 }

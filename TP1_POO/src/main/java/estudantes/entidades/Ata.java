@@ -57,11 +57,10 @@ public class Ata extends Documento {
         return false;
     }
 
+    @Override
     public int hashCode() {
-        int result = Objects.hash(super.hashCode(), numero, texto);
-        result = 31 * result + Arrays.hashCode(presentes);
-        return result;
+        int hash = Objects.hash(super.hashCode(), numero, texto);
+        hash = 31 * hash + Arrays.hashCode(presentes);
+        return hash;
     }
-
-
 }

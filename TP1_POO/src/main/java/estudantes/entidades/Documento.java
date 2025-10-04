@@ -28,7 +28,7 @@ public abstract class Documento {
         return criador;
     }
 
-    public CodigoCurso getCodigoCruso() {
+    public CodigoCurso getCodigoCurso() {
         return codigoCurso;
     }
 
@@ -54,6 +54,7 @@ public abstract class Documento {
         return false;
     }
 
+    @Override
     public int hashCode() {
         return Objects.hash(criador, codigoCurso, paginas);
     }

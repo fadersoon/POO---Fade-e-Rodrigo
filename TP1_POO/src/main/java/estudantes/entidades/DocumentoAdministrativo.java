@@ -29,15 +29,15 @@ public class DocumentoAdministrativo extends Documento {
         if (this.getClass() != o.getClass()) {
             return false;
         }
-        if (!super.equals(o)) {
+        DocumentoAcademico documentoAcademico = (DocumentoAcademico) o;
+        if (!super.equals(documentoAcademico)) {
             return false;
         }
-        DocumentoAcademico documentoAcademico = (DocumentoAcademico) o;
         return false;
     }
 
+    @Override
     public int hashCode() {
         return Objects.hash(super.hashCode());
     }
-
 }
