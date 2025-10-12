@@ -18,10 +18,6 @@ public class Registro extends DocumentoAcademico {
         this.matricula = matricula;
     }
 
-    public Registro() {
-        super();
-    }
-
     public String getEstudante() {
         return estudante;
     }
@@ -41,9 +37,11 @@ public class Registro extends DocumentoAcademico {
         if (this.getClass() != o.getClass())
             return false;
 
+        if (!super.equals(o))
+            return false;
+
         Registro registro = (Registro) o;
-        if (registro.estudante.equals(this.estudante) && registro.matricula == this.matricula && registro.getAutenticacao() == this.getAutenticacao()
-        && registro.getCriador().equals(this.getCriador()) && registro.getCodigoCurso().equals(this.getCodigoCurso()) && registro.getPaginas() == this.getPaginas())
+        if (registro.estudante.equals(this.estudante) && registro.matricula == this.matricula)
             return true;
         return false;
     }

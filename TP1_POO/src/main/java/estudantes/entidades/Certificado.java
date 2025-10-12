@@ -17,10 +17,6 @@ public class Certificado extends Registro {
         this.descricao = descricao;
     }
 
-    public Certificado() {
-        super();
-    }
-
     public String getDescricao() {
         return descricao;
     }

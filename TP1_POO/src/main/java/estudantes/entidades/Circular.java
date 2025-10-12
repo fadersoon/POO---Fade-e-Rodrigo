@@ -17,10 +17,6 @@ public class Circular extends Deliberacao {
         this.destinatarios = destinatarios;
     }
 
-    public Circular() {
-        super();
-    }
-
     public String[] getDestinatarios() {
         return destinatarios;
     }

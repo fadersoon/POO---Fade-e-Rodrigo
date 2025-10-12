@@ -14,10 +14,6 @@ public class DocumentoAdministrativo extends Documento {
         super(criador, codigoCurso, paginas);
     }
 
-    public DocumentoAdministrativo() {
-        super();
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -29,11 +25,10 @@ public class DocumentoAdministrativo extends Documento {
         if (this.getClass() != o.getClass()) {
             return false;
         }
-        DocumentoAcademico documentoAcademico = (DocumentoAcademico) o;
-        if (!super.equals(documentoAcademico)) {
+        if (!super.equals(o)) {
             return false;
         }
-        return false;
+        return true;
     }
 
     @Override

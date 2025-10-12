@@ -19,10 +19,6 @@ public class Historico extends Registro {
         this.coeficiente = coeficiente;
     }
 
-    public Historico() {
-        super();
-    }
-
     public double getCoeficiente() {
         return coeficiente;
     }
@@ -42,10 +38,11 @@ public class Historico extends Registro {
         if (this.getClass() != o.getClass())
             return false;
 
+        if  (!super.equals(o))
+            return false;
+
         Historico historico = (Historico) o;
-        if (historico.coeficiente == this.coeficiente && Arrays.equals(historico.componentes, this.componentes) && historico.getAutenticacao() == this.getAutenticacao()
-            && historico.getCriador().equals(this.getCriador()) && historico.getCodigoCurso().equals(this.getCodigoCurso()) && historico.getPaginas() == this.getPaginas()
-            && historico.getEstudante().equals(this.getEstudante()) && historico.getMatricula() == this.getMatricula())
+        if (historico.coeficiente ==  this.coeficiente && Arrays.equals(this.componentes, historico.componentes))
             return true;
         return false;
     }

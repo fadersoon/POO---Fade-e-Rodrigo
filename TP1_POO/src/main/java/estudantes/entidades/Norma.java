@@ -20,10 +20,6 @@ public class Norma extends DocumentoAdministrativo {
         this.texto = texto;
     }
 
-    public Norma() {
-        super();
-    }
-
     public int getNumero() {
         return numero;
     }
@@ -47,9 +43,11 @@ public class Norma extends DocumentoAdministrativo {
         if (this.getClass() != o.getClass())
             return false;
 
+        if  (!super.equals(o))
+            return false;
+
         Norma norma = (Norma) o;
-        if (norma.numero == this.numero && norma.valido == this.valido && norma.texto.equals(this.texto) && norma.getCriador().equals(this.getCriador())
-            && norma.getCodigoCurso().equals(this.getCodigoCurso()) && norma.getPaginas() == this.getPaginas())
+        if (norma.numero == this.numero && norma.valido == this.valido && norma.texto.equals(this.texto))
             return true;
         return false;
 

@@ -16,9 +16,6 @@ public class Deliberacao extends DocumentoAdministrativo {
         this.texto = texto;
     }
 
-    public Deliberacao() {
-        super();
-    }
 
     public String getTexto() {
         return texto;

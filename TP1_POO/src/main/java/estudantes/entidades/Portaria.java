@@ -16,10 +16,6 @@ public class Portaria extends Norma {
         this.anoInicio = anoInicio;
     }
 
-    public Portaria() {
-        super();
-    }
-
     public int getAnoInicio() {
         return anoInicio;
     }
@@ -35,10 +31,11 @@ public class Portaria extends Norma {
         if (this.getClass() != o.getClass())
             return false;
 
+        if (!super.equals(o))
+            return false;
+
         Portaria portaria = (Portaria) o;
-        if (portaria.anoInicio == this.anoInicio && portaria.getCriador().equals(this.getCriador()) && portaria.getCodigoCurso().equals(this.getCodigoCurso())
-                && portaria.getPaginas() == this.getPaginas() && portaria.getNumero() == this.getNumero() &&  portaria.getValido() == this.getValido()
-                && portaria.getTexto().equals(this.getTexto()))
+        if (portaria.anoInicio == this.anoInicio)
             return true;
         return false;
     }

@@ -19,10 +19,6 @@ public class Atestado extends Registro {
         this.categoria = categoria;
     }
 
-    public Atestado() {
-        super();
-    }
-
     public String getDescricao() {
         return descricao;
     }

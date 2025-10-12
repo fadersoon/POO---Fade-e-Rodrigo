@@ -18,10 +18,6 @@ public class Plano extends DocumentoAcademico {
         this.planejamento = planejamento;
     }
 
-    public Plano() {
-        super();
-    }
-
     public String getResponsavel() {
         return responsavel;
     }
@@ -41,9 +37,11 @@ public class Plano extends DocumentoAcademico {
         if (this.getClass() != o.getClass())
             return false;
 
+        if (!super.equals(o))
+            return false;
+
         Plano plano = (Plano) o;
-        if (plano.responsavel.equals(this.responsavel) && Arrays.equals(plano.planejamento, this.planejamento) && plano.getCriador().equals(this.getCriador())
-        && plano.getCodigoCurso().equals(this.getCodigoCurso()) && plano.getPaginas() == this.getPaginas() && plano.getAutenticacao() == this.getAutenticacao())
+        if (plano.responsavel.equals(this.responsavel) && Arrays.equals(this.planejamento, plano.planejamento))
             return true;
         return false;
     }

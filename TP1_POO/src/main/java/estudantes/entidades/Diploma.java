@@ -17,9 +17,6 @@ public class Diploma extends Certificado {
         this.habilitacao = habilitacao;
     }
 
-    public Diploma() {
-        super();
-    }
 
     public String getHabilitacao() {
         return habilitacao;
@@ -36,10 +33,11 @@ public class Diploma extends Certificado {
         if (this.getClass() != o.getClass())
             return false;
 
+        if (!super.equals(o))
+            return false;
+
         Diploma diploma = (Diploma) o;
-        if (diploma.habilitacao.equals(this.habilitacao) && diploma.getEstudante().equals(this.getEstudante()) && diploma.getMatricula() == this.getMatricula()
-            && diploma.getAutenticacao() == this.getAutenticacao() && diploma.getCriador().equals(this.getCriador()) && diploma.getCodigoCurso().equals(this.getCodigoCurso())
-                && diploma.getPaginas() == this.getPaginas() && diploma.getDescricao().equals(this.getDescricao()))
+        if (diploma.habilitacao.equals(this.habilitacao))
             return true;
         return false;
     }

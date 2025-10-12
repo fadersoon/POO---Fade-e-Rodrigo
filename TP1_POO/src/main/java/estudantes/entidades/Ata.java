@@ -21,9 +21,6 @@ public class Ata extends Documento {
         this.presentes = presentes;
     }
 
-    public Ata() {
-    }
-
     public int getNumero() {
         return numero;
     }

@@ -21,8 +21,6 @@ public abstract class Documento {
         this.paginas = paginas;
     }
 
-    public Documento() {
-    }
 
     public String getCriador() {
         return criador;
@@ -47,8 +45,12 @@ public abstract class Documento {
         if (this.getClass() != o.getClass()) {
             return false;
         }
+
+        if (!super.equals(o))
+            return false;
+
         Documento documento = (Documento) o;
-        if (this.criador.equals(documento.criador) && this.codigoCurso.equals(documento.codigoCurso) && this.paginas == documento.paginas) {
+        if (documento.criador.equals(this.criador) && documento.codigoCurso.equals(this.codigoCurso) && this.paginas == documento.paginas) {
             return true;
         }
         return false;

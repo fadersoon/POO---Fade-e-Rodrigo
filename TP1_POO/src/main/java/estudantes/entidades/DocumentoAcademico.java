@@ -16,10 +16,6 @@ public class DocumentoAcademico extends Documento {
         this.autenticacao = autenticacao;
     }
 
-    public DocumentoAcademico() {
-        super();
-    }
-
     public long getAutenticacao() {
         return autenticacao;
     }
@@ -35,10 +31,11 @@ public class DocumentoAcademico extends Documento {
         if (this.getClass() != o.getClass()) {
             return false;
         }
-        DocumentoAcademico documentoAcademico = (DocumentoAcademico) o;
-        if (!super.equals(documentoAcademico)) {
+        if (!super.equals(o)) {
             return false;
         }
+
+        DocumentoAcademico documentoAcademico = (DocumentoAcademico) o;
         if (this.autenticacao == documentoAcademico.autenticacao) {
             return true;
         }

@@ -16,10 +16,6 @@ public class Oficio extends Deliberacao {
         this.destinatario = destinatario;
     }
 
-    public Oficio() {
-        super();
-    }
-
     public String getDestinatario() {
         return destinatario;
     }
@@ -35,9 +31,11 @@ public class Oficio extends Deliberacao {
         if (this.getClass() != o.getClass())
             return false;
 
+        if (!super.equals(o))
+            return false;
+
         Oficio oficio = (Oficio) o;
-        if (oficio.destinatario.equals(this.destinatario) && oficio.getCriador().equals(this.getCriador()) && oficio.getCodigoCurso().equals(this.getCodigoCurso())
-        && oficio.getPaginas() == this.getPaginas() && oficio.getTexto().equals(this.getTexto()))
+        if (oficio.destinatario.equals(this.destinatario))
             return true;
         return false;
     }
