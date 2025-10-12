@@ -2,6 +2,8 @@ package estudantes.entidades;
 
 import professor.entidades.*;
 
+import java.util.Arrays;
+
 /**
  * Classe que traz a lógica do algoritmo de organização e despacho de processos.
  * <br><br>
@@ -60,8 +62,25 @@ public class Burocrata {
      * @see professor.entidades.Universidade#devolverDocumentoParaMonteDoCurso(Documento, professor.entidades.CodigoCurso)
      */
     public void trabalhar() {
+        Processo[] processosNaMesa = mesa.getProcessos();
 
-    }
+        Documento[] docCC = universidade.pegarCopiaDoMonteDoCurso(CodigoCurso.GRADUACAO_CIENCIA_DA_COMPUTACAO);
+        Documento primeiroDaPilhaCC = docCC[0];
+        universidade.removerDocumentoDoMonteDoCurso(primeiroDaPilhaCC, CodigoCurso.GRADUACAO_CIENCIA_DA_COMPUTACAO);
+
+        for (int i = 0; i < processosNaMesa.length; i++) {
+            Processo processo = processosNaMesa[i];
+
+            if (processo.pegarCopiaDoProcesso().length == 0){
+                processo.adicionarDocumento(primeiroDaPilhaCC);
+                universidade.despachar(processo);
+                return;
+            }
+        }
+
+        universidade.devolverDocumentoParaMonteDoCurso(primeiroDaPilhaCC, CodigoCurso.GRADUACAO_CIENCIA_DA_COMPUTACAO);
+        }
+
     public int estressar(){
         return estresse++;
     }
