@@ -46,9 +46,6 @@ public abstract class Documento {
             return false;
         }
 
-        if (!super.equals(o))
-            return false;
-
         Documento documento = (Documento) o;
         if (documento.criador.equals(this.criador) && documento.codigoCurso.equals(this.codigoCurso) && this.paginas == documento.paginas) {
             return true;
