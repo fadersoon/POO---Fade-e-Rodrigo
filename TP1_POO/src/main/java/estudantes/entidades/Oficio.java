@@ -11,7 +11,7 @@ import java.util.Objects;
 public class Oficio extends Deliberacao {
     private String destinatario;
 
-    public Oficio(String criador,CodigoCurso codigoCurso, int paginas, String destinatario, String texto) {
+    public Oficio(String criador,CodigoCurso codigoCurso, int paginas, String texto, String destinatario) {
         super(criador, codigoCurso, paginas, texto);
         this.destinatario = destinatario;
     }
