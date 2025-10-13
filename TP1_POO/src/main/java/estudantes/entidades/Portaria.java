@@ -11,7 +11,7 @@ import java.util.Objects;
 public class Portaria extends Norma {
     private int anoInicio;
 
-    public Portaria(String criador, CodigoCurso codigoCurso, int numero, int paginas, boolean valido, String texto, int anoInicio) {
+    public Portaria(String criador, CodigoCurso codigoCurso, int paginas, int numero, boolean valido, String texto, int anoInicio) {
         super(criador, codigoCurso, paginas, numero, valido, texto);
         this.anoInicio = anoInicio;
     }
