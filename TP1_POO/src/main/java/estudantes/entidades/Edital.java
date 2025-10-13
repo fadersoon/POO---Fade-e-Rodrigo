@@ -12,7 +12,7 @@ import java.util.Objects;
 public class Edital extends Norma {
     private String[] responsaveis;
 
-    public Edital(String criador, CodigoCurso codigoCurso, int numero, int paginas, boolean valido, String texto, String[] responsaveis) {
+    public Edital(String criador, CodigoCurso codigoCurso, int paginas, int numero, boolean valido, String texto, String[] responsaveis) {
         super(criador, codigoCurso, paginas, numero, valido, texto);
         this.responsaveis = responsaveis;
     }
