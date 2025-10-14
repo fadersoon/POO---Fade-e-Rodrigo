@@ -8,10 +8,10 @@ import java.util.List;
 /**
  * Classe que traz a lógica do algoritmo de organização e despacho de processos.
  * <br><br>
- * Você pode incluir novos atributos e métodos nessa classe para criar
- * lógicas mais complexas para o gerenciamento da organização e despacho de
- * processos, mas esses <strong>atributos e métodos devem ser todos
- * privados</strong> e eles não serão invocados diretamente pelo simulador.
+ * Você pode incluir novos atributos e métodos nessa classe para criar lógicas
+ * mais complexas para o gerenciamento da organização e despacho de processos,
+ * mas esses <strong>atributos e métodos devem ser todos privados</strong> e
+ * eles não serão invocados diretamente pelo simulador.
  * <br><br>
  * Os únicos métodos públicos devem ser: getEstresse, trabalhar, estressar e
  * estressarMuito.
@@ -20,6 +20,7 @@ import java.util.List;
  * @author Fade Hassan Husein Kanaan
  */
 public class Burocrata {
+
     private int estresse = 0;
     private Mesa mesa;
     private Universidade universidade;
@@ -38,13 +39,13 @@ public class Burocrata {
     /**
      * Executa a lógica de criação e despacho dos processos.
      * <br><br>
-     * Esse método é o único método de controle invocado durante a simulação
-     * da universidade.
+     * Esse método é o único método de controle invocado durante a simulação da
+     * universidade.
      * <br><br>
      * Aqui podem ser feitas todas as verificações sobre os documentos nos
      * montes dos cursos e dos processos abertos na mesa do Burocrata. A partir
-     * dessas informações, você pode colocar documentos nos processos abertos
-     * e despachar os processos para a secretaria acadêmica.
+     * dessas informações, você pode colocar documentos nos processos abertos e
+     * despachar os processos para a secretaria acadêmica.
      * <br><br>
      * Cuidado com a complexidade do seu algoritmo, porque se ele demorar muito
      * serão criados menos documentos na sua execução e sua produtividade geral
@@ -59,11 +60,15 @@ public class Burocrata {
      * dos cursos.
      *
      * @see professor.entidades.Universidade#despachar(Processo)
-     * @see professor.entidades.Universidade#removerDocumentoDoMonteDoCurso(Documento, professor.entidades.CodigoCurso)
-     * @see professor.entidades.Universidade#devolverDocumentoParaMonteDoCurso(Documento, professor.entidades.CodigoCurso)
+     * @see
+     * professor.entidades.Universidade#removerDocumentoDoMonteDoCurso(Documento,
+     * professor.entidades.CodigoCurso)
+     * @see
+     * professor.entidades.Universidade#devolverDocumentoParaMonteDoCurso(Documento,
+     * professor.entidades.CodigoCurso)
      */
     public void trabalhar() {
-     /*   Processo[] processosNaMesa = mesa.getProcessos();
+        Processo[] processosNaMesa = mesa.getProcessos();
 
         Documento[] docCC = universidade.pegarCopiaDoMonteDoCurso(CodigoCurso.GRADUACAO_CIENCIA_DA_COMPUTACAO);
         Documento primeiroDaPilhaCC = docCC[0];
@@ -72,53 +77,25 @@ public class Burocrata {
         for (int i = 0; i < processosNaMesa.length; i++) {
             Processo processo = processosNaMesa[i];
 
-            if (processo.pegarCopiaDoProcesso().length == 0){
+            if (processo.pegarCopiaDoProcesso().length == 0) {
                 processo.adicionarDocumento(primeiroDaPilhaCC);
                 universidade.despachar(processo);
                 return;
             }
         }
 
-        universidade.devolverDocumentoParaMonteDoCurso(primeiroDaPilhaCC, CodigoCurso.GRADUACAO_CIENCIA_DA_COMPUTACAO);*/
-     
-     // Itera sobre cada despacho para ver a possibilidade de despacho
-     Processo[] processosAbertos=mesa.getProcessos();
-     for (Processo processo: processosAbertos){
-         if(processo==null){
-             continue;
-         }
-         if(verificarDespachoPortariaOuEdital(processo)){ 
-             universidade.despachar(processo);
-             continue;
-         }
-         
-     }
+        universidade.devolverDocumentoParaMonteDoCurso(primeiroDaPilhaCC, CodigoCurso.GRADUACAO_CIENCIA_DA_COMPUTACAO);
     }
-     
-    // Método para um processo que contenha uma Portaria ou um Edital que seja válido,tenha 100 ou mais páginas e que não contém nenhum outro documento
-     private boolean verificarDespachoPortariaOuEdital(Processo processo){
-         Documento[] documentosNoProcesso= processo.pegarCopiaDoProcesso();
-         if(documentosNoProcesso.length != 1){
-             return false;
-         }
-         Documento doc= documentosNoProcesso[0];
-         if(doc instanceof Portaria || doc instanceof  Edital){
-         Norma norma = (Norma) doc;
-         return norma.getValido() && norma.getPaginas() >= 100;
-          }
-          return false;
-     }
-       
-    
-    public int estressar(){
+
+    public int estressar() {
         return estresse++;
     }
 
-    public int getEstresse(){
+    public int getEstresse() {
         return estresse;
     }
 
-    public int estressarMuito(){
-        return estresse+=10;
+    public int estressarMuito() {
+        return estresse += 10;
     }
 }
