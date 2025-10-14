@@ -3,6 +3,7 @@ package estudantes.entidades;
 import professor.entidades.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Classe que traz a lógica do algoritmo de organização e despacho de processos.
@@ -62,7 +63,7 @@ public class Burocrata {
      * @see professor.entidades.Universidade#devolverDocumentoParaMonteDoCurso(Documento, professor.entidades.CodigoCurso)
      */
     public void trabalhar() {
-        Processo[] processosNaMesa = mesa.getProcessos();
+     /*   Processo[] processosNaMesa = mesa.getProcessos();
 
         Documento[] docCC = universidade.pegarCopiaDoMonteDoCurso(CodigoCurso.GRADUACAO_CIENCIA_DA_COMPUTACAO);
         Documento primeiroDaPilhaCC = docCC[0];
@@ -78,9 +79,37 @@ public class Burocrata {
             }
         }
 
-        universidade.devolverDocumentoParaMonteDoCurso(primeiroDaPilhaCC, CodigoCurso.GRADUACAO_CIENCIA_DA_COMPUTACAO);
-        }
-
+        universidade.devolverDocumentoParaMonteDoCurso(primeiroDaPilhaCC, CodigoCurso.GRADUACAO_CIENCIA_DA_COMPUTACAO);*/
+     
+     // Itera sobre cada despacho para ver a possibilidade de despacho
+     Processo[] processosAbertos=mesa.getProcessos();
+     for (Processo processo: processosAbertos){
+         if(processo==null){
+             continue;
+         }
+         if(verificarDespachoPortariaOuEdital(processo)){ 
+             universidade.despachar(processo);
+             continue;
+         }
+         
+     }
+    }
+     
+    // Método para um processo que contenha uma Portaria ou um Edital que seja válido,tenha 100 ou mais páginas e que não contém nenhum outro documento
+     private boolean verificarDespachoPortariaOuEdital(Processo processo){
+         Documento[] documentosNoProcesso= processo.pegarCopiaDoProcesso();
+         if(documentosNoProcesso.length != 1){
+             return false;
+         }
+         Documento doc= documentosNoProcesso[0];
+         if(doc instanceof Portaria || doc instanceof  Edital){
+         Norma norma = (Norma) doc;
+         return norma.getValido() && norma.getPaginas() >= 100;
+          }
+          return false;
+     }
+       
+    
     public int estressar(){
         return estresse++;
     }
