@@ -117,7 +117,8 @@
                     }
 
                     if (processoQuaseCheio || portariaOuEdital) {
-                        universidade.despachar(proc);
+                        if(processoValidoParaDespacho(proc))
+                            universidade.despachar(proc);
                     }
                 }
             }
@@ -279,7 +280,6 @@
                     }
                 }
             }
-
             return true;
         }
 
