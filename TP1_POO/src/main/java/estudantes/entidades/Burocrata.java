@@ -71,6 +71,7 @@
         public void trabalhar() {
             List<Documento> todosDocumentos = new ArrayList<Documento>();
 
+            // Pegar todos documentos e remover do monte
             for (CodigoCurso cursos : CodigoCurso.values()) {
                 for (Documento documento : universidade.pegarCopiaDoMonteDoCurso(cursos)) {
                     if (universidade.removerDocumentoDoMonteDoCurso(documento, cursos)) {
@@ -79,14 +80,50 @@
                 }
             }
 
-                List<Documento> documentosLivres = new ArrayList<>();
+            // Adicionar documento a um processo (Metodo de verificaçao)
+            List<Documento> documentosLivres = new ArrayList<>();
+            for (Documento documento : todosDocumentos) {
+                boolean documentoValido = false;
+                for (Processo processo : mesa.getProcessos()){
+                    if (processo != null && verificacaoSecretariaDoc(documento, processo)) {
+                        processo.adicionarDocumento(documento);
+                        documentoValido = true;
+                        break;
+                    }
+                }
+                if (!documentoValido) {
+                    documentosLivres.add(documento);
+                }
+            }
 
-            Documento[] docCC = universidade.pegarCopiaDoMonteDoCurso(CodigoCurso.GRADUACAO_CIENCIA_DA_COMPUTACAO);
+            // Voltar documento que não pôde ser adicionado pro monte de documentos
+            for (Documento documentosInvalido : documentosLivres) {
+                universidade.devolverDocumentoParaMonteDoCurso(documentosInvalido, documentosInvalido.getCodigoCurso());
+            }
 
-                universidade.devolverDocumentoParaMonteDoCurso(todosDocumentos.getFirst(), CodigoCurso.GRADUACAO_CIENCIA_DA_COMPUTACAO);
+            // Despachar processos válidos, com preferencia nos com mais de 200 paginas ou que cumpra a regra de portaria ou edital
+            for (Processo proc : mesa.getProcessos()){
+                if ((proc != null) && (proc.pegarCopiaDoProcesso().length > 0)) {
+                    boolean processoQuaseCheio = contarPaginasProcesso(proc) > 200;
+
+                    boolean portariaOuEdital = false;
+                    Documento[] documentosNoProcesso = proc.pegarCopiaDoProcesso();
+
+                    if (documentosNoProcesso.length == 1 && documentosNoProcesso[0] instanceof Norma) {
+                        Norma norma = (Norma) documentosNoProcesso[0];
+                        if (norma.getPaginas() >= 100 && norma.getValido()) {
+                            portariaOuEdital = true;
+                        }
+                    }
+
+                    if (processoQuaseCheio || portariaOuEdital) {
+                        universidade.despachar(proc);
+                    }
+                }
+            }
         }
 
-        public boolean verificacaoSecretariaDoc (Documento doc, Processo proc){
+        public boolean verificacaoSecretariaDoc (Documento doc, Processo proc) {
 
             // Limite de 250 páginas
             if ((contarPaginasProcesso(proc) + doc.getPaginas()) > 250)
@@ -105,12 +142,12 @@
             if (documentoGraduacao != processoGraduacao)
                 return false;
 
-            if (!(doc instanceof Ata)){
+            if (!(doc instanceof Ata)) {
                 boolean documentoAdmin = doc instanceof DocumentoAdministrativo;
                 boolean documentoAcad = doc instanceof DocumentoAcademico;
 
                 for (Documento documento : documentosNoProcesso) {
-                    if (!(documento instanceof Ata)){
+                    if (!(documento instanceof Ata)) {
                         if ((documentoAdmin && documento instanceof DocumentoAcademico) || (documentoAcad && documento instanceof DocumentoAdministrativo))
                             return false;
                     }
@@ -120,13 +157,13 @@
             // Verificação do diploma - regra 6
             boolean processoTemDiploma = false;
             for (Documento documento : documentosNoProcesso) {
-                if (documento instanceof Diploma){
+                if (documento instanceof Diploma) {
                     processoTemDiploma = true;
                     break;
                 }
             }
 
-            if (processoTemDiploma){
+            if (processoTemDiploma) {
                 if (!(doc instanceof Diploma || doc instanceof Ata || doc instanceof Certificado))
                     return false;
             }
@@ -139,9 +176,9 @@
             }
 
             // Verificação da categoria do atestado - regra 7
-            if (doc instanceof Atestado){
+            if (doc instanceof Atestado) {
                 for (Documento documento : documentosNoProcesso) {
-                    if (documento instanceof Atestado){
+                    if (documento instanceof Atestado) {
                         Atestado docAtual = (Atestado) doc;
                         Atestado atestado = (Atestado) documento;
 
@@ -151,6 +188,97 @@
                 }
             }
 
+            // Verificacao de destinatario em comum entre oficios ou circulares - regra 5
+            boolean docOficio = doc instanceof Oficio;
+            boolean docCircular = doc instanceof Circular;
+
+            if (docOficio || docCircular) {
+                for (Documento documento : documentosNoProcesso) {
+                    boolean destComum = false;
+
+                    if (documento instanceof Circular || documento instanceof Oficio) {
+
+                        if (docOficio) {
+                            if (documento instanceof Oficio) {
+                                Oficio docAtual = (Oficio) doc;
+                                Oficio oficio = (Oficio) documento;
+                                if ((docAtual.getDestinatario().equals(oficio.getDestinatario())))
+                                    destComum = true;
+                            } else if (documento instanceof Circular) {
+                                Oficio docAtual = (Oficio) doc;
+                                Circular circular = (Circular) documento;
+                                for (String circularDest : circular.getDestinatarios()) {
+                                    if (docAtual.getDestinatario().equals(circularDest)) {
+                                        destComum = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        } else if (docCircular) {
+
+                                if (documento instanceof Oficio) {
+                                    Circular docAtual = (Circular) doc;
+                                    Oficio oficio = (Oficio) documento;
+                                    for (String circularDest : docAtual.getDestinatarios()) {
+                                        if (circularDest.equals(oficio.getDestinatario())) {
+                                            destComum = true;
+                                            break;
+                                        }
+                                    }
+                                } else if (documento instanceof Circular) {
+                                    Circular docAtual = (Circular) doc;
+                                    Circular circular = (Circular) documento;
+                                    for (String circularDest : circular.getDestinatarios()) {
+                                        for (String circularDestAtual : docAtual.getDestinatarios()) {
+                                            if (circularDest.equals(circularDestAtual)) {
+                                                destComum = true;
+                                                break;
+                                            }
+                                        }
+                                        if (destComum)
+                                            break;
+                                    }
+                                }
+                            }
+                        if (!destComum)
+                            return false;
+                        }
+                    }
+                }
+
+            return true;
+        }
+
+        private boolean processoValidoParaDespacho (Processo proc){
+            Documento[] documentosNoProcesso = proc.pegarCopiaDoProcesso();
+
+            // Não pode ser despachado vazio
+            if (documentosNoProcesso.length == 0)
+                return false;
+
+            // Não pode ser despachado só com atas
+            boolean apenasAtas = true;
+            for (Documento documento : documentosNoProcesso){
+                if (!(documento instanceof Ata)){
+                    apenasAtas = false;
+                    break;
+                }
+            }
+            if (apenasAtas){
+                return false;
+            }
+
+            // Verificacao de se for portaria ou edital com mais de 100 páginas e valido, deve ser despachado sozinho
+            for (Documento documento : documentosNoProcesso){
+                if (documento instanceof Norma){
+                    Norma norma =  (Norma) documento;
+
+                    if (norma.getPaginas() >= 100 && norma.getValido()){
+                        if (documentosNoProcesso.length > 1)
+                            return false;
+                    }
+                }
+            }
 
             return true;
         }
