@@ -249,7 +249,7 @@
             return true;
         }
 
-        private boolean processoValidoParaDespacho (Processo proc){
+        public boolean processoValidoParaDespacho (Processo proc){
             Documento[] documentosNoProcesso = proc.pegarCopiaDoProcesso();
 
             // Não pode ser despachado vazio
@@ -285,7 +285,7 @@
 
 
         // Metodo igual da classe Processo
-        private int contarPaginasProcesso(Processo proc) {
+        public int contarPaginasProcesso(Processo proc) {
             int paginas = 0;
             for (Documento documento : proc.pegarCopiaDoProcesso()) {
                 paginas += documento.getPaginas();
@@ -298,15 +298,15 @@
             return curso.name().startsWith("GRADUACAO");
         }
 
-        public int estressar() {
-            return estresse++;
+        public void estressar() {
+            estresse++;
         }
 
         public int getEstresse() {
             return estresse;
         }
 
-        public int estressarMuito() {
-            return estresse += 10;
+        public void estressarMuito() {
+            estresse += 10;
         }
     }
