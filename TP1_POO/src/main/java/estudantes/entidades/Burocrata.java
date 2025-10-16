@@ -247,6 +247,26 @@
                     }
                 }
 
+            // Verificacao de se for portaria ou edital com mais de 100 páginas e valido, deve ser despachado sozinho - regra 4
+            if (doc instanceof Norma){
+                Norma norma =  (Norma) doc;
+                if (norma.getPaginas() >= 100 && norma.getValido()){
+                    if (documentosNoProcesso.length > 0){
+                        return false;
+                    }
+                }
+            }
+
+            // Se já tiver uma portaria ou edital com mais de 100 páginas e valido no processo, não tem o que ser feito
+            for (Documento documento : documentosNoProcesso) {
+                if (documento instanceof Norma) {
+                    Norma norma = (Norma) documento;
+                    if (norma.getPaginas() >= 100 && norma.getValido()) {
+                        return false;
+                    }
+                }
+            }
+
             return true;
         }
 
@@ -257,7 +277,7 @@
             if (documentosNoProcesso.length == 0)
                 return false;
 
-            // Não pode ser despachado só com atas
+            // Não pode ser despachado só com atas - regra 3
             boolean apenasAtas = true;
             for (Documento documento : documentosNoProcesso){
                 if (!(documento instanceof Ata)){
@@ -269,17 +289,6 @@
                 return false;
             }
 
-            // Verificacao de se for portaria ou edital com mais de 100 páginas e valido, deve ser despachado sozinho
-            for (Documento documento : documentosNoProcesso){
-                if (documento instanceof Norma){
-                    Norma norma =  (Norma) documento;
-
-                    if (norma.getPaginas() >= 100 && norma.getValido()){
-                        if (documentosNoProcesso.length > 1)
-                            return false;
-                    }
-                }
-            }
             return true;
         }
 
