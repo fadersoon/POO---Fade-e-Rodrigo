@@ -26,6 +26,7 @@
         private int estresse = 0;
         private Mesa mesa;
         private Universidade universidade;
+        private final int LimiteProcessoGrad = 3; // Processos 0,1 e 2 para documentos de graduacao. Processos 3 e 4 para doc de pós.
 
         /**
          * Construtor de Burocrata.
@@ -70,39 +71,37 @@
          * professor.entidades.CodigoCurso)
          */
         public void trabalhar() {
-            List<Documento> todosDocumentos = new ArrayList<Documento>();
+            Processo[] processosDaMesa = mesa.getProcessos();
+            int intervaloDoc;
+            int fimIntervaloDoc;
 
-            // Pegar todos documentos e remover do monte
-            for (CodigoCurso cursos : CodigoCurso.values()) {
-                for (Documento documento : universidade.pegarCopiaDoMonteDoCurso(cursos)) {
-                    if (universidade.removerDocumentoDoMonteDoCurso(documento, cursos)) {
-                        todosDocumentos.add(documento);
+            for (CodigoCurso curso : CodigoCurso.values()) {
+                boolean docGrad = cursoGraduacao(curso);
+
+                for (Documento doc : universidade.pegarCopiaDoMonteDoCurso(curso)) {
+                    // Define o intervalo dos processos de graduacao e pós
+                    if (docGrad){
+                        intervaloDoc = 0;
+                        fimIntervaloDoc = 3;
+                    } else {
+                        intervaloDoc = 3;
+                        fimIntervaloDoc = 5;
+                    }
+
+                    for (int i = intervaloDoc; i < fimIntervaloDoc; i++) {
+                        Processo proc = processosDaMesa[i];
+
+                        if (proc != null && verificacaoSecretariaDoc(doc, proc)) {
+                            if (universidade.removerDocumentoDoMonteDoCurso(doc, curso)) {
+                                proc.adicionarDocumento(doc);
+                                break; // Documento alocado, vai para o proximo da lista
+                            }
+                        }
                     }
                 }
             }
 
-            // Adicionar documento a um processo (Metodo de verificaçao)
-            List<Documento> documentosLivres = new ArrayList<>();
-            for (Documento documento : todosDocumentos) {
-                boolean documentoValido = false;
-                for (Processo processo : mesa.getProcessos()){
-                    if (processo != null && verificacaoSecretariaDoc(documento, processo)) {
-                        processo.adicionarDocumento(documento);
-                        documentoValido = true;
-                        break;
-                    }
-                }
-                if (!documentoValido) {
-                    documentosLivres.add(documento);
-                }
-            }
-
-            // Voltar documento que não pôde ser adicionado pro monte de documentos
-            for (Documento documentosInvalido : documentosLivres) {
-                universidade.devolverDocumentoParaMonteDoCurso(documentosInvalido, documentosInvalido.getCodigoCurso());
-            }
-
-            // Despachar processos válidos, com preferencia nos com mais de 200 paginas ou que cumpra a regra de portaria ou edital
+            // Despachar processos validos, com preferencia nos com mais de 200 paginas ou que cumpra a regra de portaria ou edital
             for (Processo proc : mesa.getProcessos()){
                 if ((proc != null) && (proc.pegarCopiaDoProcesso().length > 0)) {
                     boolean processoQuaseCheio = contarPaginasProcesso(proc) > 200;
@@ -137,8 +136,7 @@
                 return true;
 
             // Verificações da secretária
-
-            // Processo de graduação  !=  Pós - regra 1
+            // Processo de graduação  !=  pós - regra 1
             boolean documentoGraduacao = cursoGraduacao(doc.getCodigoCurso());
             boolean processoGraduacao = cursoGraduacao(documentosNoProcesso[0].getCodigoCurso());
             if (documentoGraduacao != processoGraduacao)
