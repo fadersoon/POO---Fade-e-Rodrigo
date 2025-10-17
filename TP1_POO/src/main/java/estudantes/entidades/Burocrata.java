@@ -4,6 +4,7 @@
 
     import java.sql.Array;
     import java.util.ArrayList;
+    import java.util.Arrays;
     import java.util.List;
 
     /**
@@ -190,62 +191,43 @@
             }
 
             // Verificacao de destinatario em comum entre oficios ou circulares - regra 5
-            boolean docOficio = doc instanceof Oficio;
-            boolean docCircular = doc instanceof Circular;
+            boolean docOficioOuCircular = doc instanceof Oficio || doc instanceof Circular;
+            boolean processoTemOficioOuCircular = false;
 
-            if (docOficio || docCircular) {
-                for (Documento documento : documentosNoProcesso) {
-                    boolean destComum = false;
+            for (Documento documento : documentosNoProcesso) {
+                if (documento instanceof Circular || documento instanceof Oficio) {
+                    processoTemOficioOuCircular = true;
+                    break;
+                }
+            }
 
-                    if (documento instanceof Circular || documento instanceof Oficio) {
+            if (docOficioOuCircular && processoTemOficioOuCircular) {
+                List<String> destinatarios = new ArrayList<>();
+                if (doc instanceof Oficio){
+                Oficio docAtual = (Oficio) doc;
+                destinatarios.add(docAtual.getDestinatario());
+                } else {
+                Circular docAtual = (Circular) doc;
+                destinatarios.addAll(Arrays.asList(docAtual.getDestinatarios()));
+            }
 
-                        if (docOficio) {
-                            if (documento instanceof Oficio) {
-                                Oficio docAtual = (Oficio) doc;
-                                Oficio oficio = (Oficio) documento;
-                                if ((docAtual.getDestinatario().equals(oficio.getDestinatario())))
-                                    destComum = true;
-                            } else if (documento instanceof Circular) {
-                                Oficio docAtual = (Oficio) doc;
-                                Circular circular = (Circular) documento;
-                                for (String circularDest : circular.getDestinatarios()) {
-                                    if (docAtual.getDestinatario().equals(circularDest)) {
-                                        destComum = true;
-                                        break;
-                                    }
-                                }
-                            }
-                        } else if (docCircular) {
-
-                                if (documento instanceof Oficio) {
-                                    Circular docAtual = (Circular) doc;
-                                    Oficio oficio = (Oficio) documento;
-                                    for (String circularDest : docAtual.getDestinatarios()) {
-                                        if (circularDest.equals(oficio.getDestinatario())) {
-                                            destComum = true;
-                                            break;
-                                        }
-                                    }
-                                } else if (documento instanceof Circular) {
-                                    Circular docAtual = (Circular) doc;
-                                    Circular circular = (Circular) documento;
-                                    for (String circularDest : circular.getDestinatarios()) {
-                                        for (String circularDestAtual : docAtual.getDestinatarios()) {
-                                            if (circularDest.equals(circularDestAtual)) {
-                                                destComum = true;
-                                                break;
-                                            }
-                                        }
-                                        if (destComum)
-                                            break;
-                                    }
-                                }
-                            }
-                        if (!destComum)
-                            return false;
-                        }
+                /* começo do código gerado por IA */
+                for (Documento d : documentosNoProcesso) {
+                    if (d instanceof Oficio) {
+                        Oficio oficioNoProcesso = (Oficio) d;
+                        destinatarios.retainAll(List.of(oficioNoProcesso.getDestinatario()));
+                    } else if (d instanceof Circular) {
+                        Circular circularNoProcesso = (Circular) d;
+                        destinatarios.retainAll(Arrays.asList(circularNoProcesso.getDestinatarios()));
                     }
                 }
+                /* fim do código gerado por IA */
+
+                if (destinatarios.isEmpty()) {
+                    return false;
+                }
+            }
+
 
             // Verificacao de se for portaria ou edital com mais de 100 páginas e valido, deve ser despachado sozinho - regra 4
             if (doc instanceof Norma){
