@@ -11,9 +11,10 @@ import java.util.Objects;
  * @author Fade Hassan Husein Kanaan
  */
 public class Atestado extends Registro {
+
     private String descricao;
     private String categoria;
-    
+
     /**
      * Construtor da classe Atestado.
      *
@@ -27,7 +28,7 @@ public class Atestado extends Registro {
      * @param categoria A categoria do atestado.
      */
     public Atestado(String criador, CodigoCurso codigoCurso, int paginas, long matricula, String estudante, long autenticacao,
-                    String descricao, String categoria) {
+            String descricao, String categoria) {
         super(criador, codigoCurso, paginas, autenticacao, estudante, matricula);
         this.descricao = descricao;
         this.categoria = categoria;
@@ -52,28 +53,34 @@ public class Atestado extends Registro {
     }
 
     /**
-     * Compara este objeto Atestado com outro objeto para verificar se são iguais.
+     * Compara este objeto Atestado com outro objeto para verificar se são
+     * iguais.
      *
      * @param o O objeto a ser comparado.
      * @return true se os objetos forem iguais, false caso contrário.
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o)
+        if (this == o) {
             return true;
+        }
 
-        if (o == null)
+        if (o == null) {
             return false;
+        }
 
-        if (this.getClass() != o.getClass())
+        if (this.getClass() != o.getClass()) {
             return false;
+        }
 
-        if (!super.equals(o))
+        if (!super.equals(o)) {
             return false;
+        }
 
         Atestado atestado = (Atestado) o;
-        if (atestado.descricao.equals(this.descricao) && atestado.categoria.equals(this.categoria))
+        if (atestado.descricao.equals(this.descricao) && atestado.categoria.equals(this.categoria)) {
             return true;
+        }
         return false;
     }
 
