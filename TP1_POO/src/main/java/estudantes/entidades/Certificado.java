@@ -4,23 +4,48 @@ import professor.entidades.CodigoCurso;
 
 import java.util.Objects;
 
-/*
+/**
+ * Representa um certificado, que é um tipo de registro acadêmico.
+ * Este documento serve para comprovar a participação ou conclusão em alguma atividade.
+ *
  * @author Rodrigo Thoma da Silva
  * @author Fade Hassan Husein Kanaan
  */
 public class Certificado extends Registro {
     private String descricao;
 
+    /**
+     * Construtor da classe Certificado.
+     *
+     * @param criador       O nome do criador do documento.
+     * @param codigoCurso   O código do curso associado ao documento.
+     * @param paginas       O número de páginas do documento.
+     * @param autenticacao  O código de autenticação do registro.
+     * @param estudante     O nome do estudante a quem o certificado se refere.
+     * @param matricula     A matrícula do estudante.
+     * @param descricao     A descrição do certificado.
+     */
     public Certificado(String criador, CodigoCurso codigoCurso, int paginas,
                        long autenticacao, String estudante, long matricula, String descricao) {
         super(criador, codigoCurso, paginas, autenticacao, estudante, matricula);
         this.descricao = descricao;
     }
 
+    /**
+     * Retorna a descrição do certificado.
+     *
+     * @return a descrição do certificado.
+     */
     public String getDescricao() {
         return descricao;
     }
 
+    /**
+     * Compara este objeto Certificado com outro objeto para verificar se são iguais.
+     *
+     * @param o O objeto a ser comparado.
+     * @return true se os objetos forem iguais, false caso contrário.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -42,6 +67,11 @@ public class Certificado extends Registro {
         return false;
     }
 
+    /**
+     * Retorna o código de hash para este objeto Certificado.
+     *
+     * @return o código de hash.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), descricao);
