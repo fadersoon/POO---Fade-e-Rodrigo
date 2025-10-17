@@ -5,28 +5,30 @@ import professor.entidades.CodigoCurso;
 import java.util.Objects;
 
 /**
- * Representa um certificado, que é um tipo de registro acadêmico.
- * Este documento serve para comprovar a participação ou conclusão em alguma atividade.
+ * Representa um certificado, que é um tipo de registro acadêmico. Este
+ * documento serve para comprovar a participação ou conclusão em alguma
+ * atividade.
  *
  * @author Rodrigo Thoma da Silva
  * @author Fade Hassan Husein Kanaan
  */
 public class Certificado extends Registro {
+
     private String descricao;
 
     /**
      * Construtor da classe Certificado.
      *
-     * @param criador       O nome do criador do documento.
-     * @param codigoCurso   O código do curso associado ao documento.
-     * @param paginas       O número de páginas do documento.
-     * @param autenticacao  O código de autenticação do registro.
-     * @param estudante     O nome do estudante a quem o certificado se refere.
-     * @param matricula     A matrícula do estudante.
-     * @param descricao     A descrição do certificado.
+     * @param criador O nome do criador do documento.
+     * @param codigoCurso O código do curso associado ao documento.
+     * @param paginas O número de páginas do documento.
+     * @param autenticacao O código de autenticação do registro.
+     * @param estudante O nome do estudante a quem o certificado se refere.
+     * @param matricula A matrícula do estudante.
+     * @param descricao A descrição do certificado.
      */
     public Certificado(String criador, CodigoCurso codigoCurso, int paginas,
-                       long autenticacao, String estudante, long matricula, String descricao) {
+            long autenticacao, String estudante, long matricula, String descricao) {
         super(criador, codigoCurso, paginas, autenticacao, estudante, matricula);
         this.descricao = descricao;
     }
@@ -41,29 +43,34 @@ public class Certificado extends Registro {
     }
 
     /**
-     * Compara este objeto Certificado com outro objeto para verificar se são iguais.
+     * Compara este objeto Certificado com outro objeto para verificar se são
+     * iguais.
      *
      * @param o O objeto a ser comparado.
      * @return true se os objetos forem iguais, false caso contrário.
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o)
+        if (this == o) {
             return true;
+        }
 
-        if (o == null)
+        if (o == null) {
             return false;
+        }
 
-        if (this.getClass() != o.getClass())
+        if (this.getClass() != o.getClass()) {
             return false;
+        }
 
-
-        if (!super.equals(o))
+        if (!super.equals(o)) {
             return false;
+        }
 
         Certificado certificado = (Certificado) o;
-        if (certificado.descricao.equals(this.descricao))
+        if (certificado.descricao.equals(this.descricao)) {
             return true;
+        }
         return false;
     }
 

@@ -6,23 +6,24 @@ import java.util.Arrays;
 import java.util.Objects;
 
 /**
- * Representa uma circular, que é um tipo de deliberação.
- * Uma circular é um documento destinado a múltiplos destinatários para
- * comunicar uma decisão ou informação.
+ * Representa uma circular, que é um tipo de deliberação. Uma circular é um
+ * documento destinado a múltiplos destinatários para comunicar uma decisão ou
+ * informação.
  *
  * @author Rodrigo Thoma da Silva
  * @author Fade Hassan Husein Kanaan
  */
 public class Circular extends Deliberacao {
+
     private String[] destinatarios;
 
     /**
      * Construtor da classe Circular.
      *
-     * @param criador       O nome do criador do documento.
-     * @param codigoCurso   O código do curso associado ao documento.
-     * @param paginas       O número de páginas do documento.
-     * @param texto         O conteúdo textual da deliberação.
+     * @param criador O nome do criador do documento.
+     * @param codigoCurso O código do curso associado ao documento.
+     * @param paginas O número de páginas do documento.
+     * @param texto O conteúdo textual da deliberação.
      * @param destinatarios Um array com os nomes dos destinatários da circular.
      */
     public Circular(String criador, CodigoCurso codigoCurso, int paginas, String texto, String[] destinatarios) {
@@ -40,28 +41,34 @@ public class Circular extends Deliberacao {
     }
 
     /**
-     * Compara este objeto Circular com outro objeto para verificar se são iguais.
+     * Compara este objeto Circular com outro objeto para verificar se são
+     * iguais.
      *
      * @param o O objeto a ser comparado.
      * @return true se os objetos forem iguais, false caso contrário.
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o)
+        if (this == o) {
             return true;
+        }
 
-        if (o == null)
+        if (o == null) {
             return false;
+        }
 
-        if (this.getClass() != o.getClass())
+        if (this.getClass() != o.getClass()) {
             return false;
+        }
 
-        if (!super.equals(o))
+        if (!super.equals(o)) {
             return false;
+        }
 
         Circular circular = (Circular) o;
-        if (Arrays.equals(circular.destinatarios, this.destinatarios))
+        if (Arrays.equals(circular.destinatarios, this.destinatarios)) {
             return true;
+        }
         return false;
     }
 
