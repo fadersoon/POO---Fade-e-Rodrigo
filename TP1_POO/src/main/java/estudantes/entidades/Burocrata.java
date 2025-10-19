@@ -124,7 +124,7 @@
             }
         }
 
-        public boolean verificacaoSecretariaDoc (Documento doc, Processo proc) {
+        private boolean verificacaoSecretariaDoc (Documento doc, Processo proc) {
 
             // Limite de 250 páginas
             if ((contarPaginasProcesso(proc) + doc.getPaginas()) > 250)
@@ -250,7 +250,7 @@
             return true;
         }
 
-        public boolean processoValidoParaDespacho (Processo proc){
+        private boolean processoValidoParaDespacho (Processo proc){
             Documento[] documentosNoProcesso = proc.pegarCopiaDoProcesso();
 
             // Não pode ser despachado vazio
@@ -274,7 +274,7 @@
 
 
         // Metodo igual da classe Processo
-        public int contarPaginasProcesso(Processo proc) {
+        private int contarPaginasProcesso(Processo proc) {
             int paginas = 0;
             for (Documento documento : proc.pegarCopiaDoProcesso()) {
                 paginas += documento.getPaginas();
@@ -283,7 +283,7 @@
         }
 
         // Metodo pra verificar o prefixo do curso, pra saber se ele é de graduação ou não
-        public boolean cursoGraduacao (CodigoCurso curso){
+        private boolean cursoGraduacao (CodigoCurso curso){
             return curso.name().startsWith("GRADUACAO");
         }
 
