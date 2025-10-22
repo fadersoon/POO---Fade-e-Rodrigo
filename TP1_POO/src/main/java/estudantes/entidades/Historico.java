@@ -24,14 +24,14 @@ public class Historico extends Registro {
      * @param criador O nome do criador do documento.
      * @param codigoCurso O código do curso associado ao documento.
      * @param paginas O número de páginas do documento.
-     * @param matricula A matrícula do estudante.
+     * @param autenticacao O código de autenticação do registro. 
      * @param estudante O nome do estudante.
-     * @param autenticacao O código de autenticação do registro.
+     * @param matricula A matrícula do estudante. 
      * @param coeficiente O coeficiente de rendimento do estudante.
      * @param componentes Um array com os nomes dos componentes curriculares
      * cursados.
      */
-    public Historico(String criador, CodigoCurso codigoCurso, int paginas, long matricula, String estudante, long autenticacao,
+    public Historico(String criador, CodigoCurso codigoCurso, int paginas, long autenticacao, String estudante, long matricula,
             double coeficiente, String[] componentes) {
         super(criador, codigoCurso, paginas, autenticacao, estudante, matricula);
         this.coeficiente = coeficiente;

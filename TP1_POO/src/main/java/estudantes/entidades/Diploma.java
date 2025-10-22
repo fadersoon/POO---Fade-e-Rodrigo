@@ -21,14 +21,14 @@ public class Diploma extends Certificado {
      * @param criador O nome do criador do documento.
      * @param codigoCurso O código do curso associado ao documento.
      * @param paginas O número de páginas do documento.
-     * @param matricula A matrícula do estudante.
-     * @param descricao A descrição do diploma.
-     * @param autenticacao O código de autenticação do registro.
-     * @param estudante O nome do estudante a quem o diploma se refere.
+     * @param autenticacao O código de autenticação do registro.     
+     * @param estudante O nome do estudante a quem o diploma se refere. 
+     * @param matricula A matrícula do estudante.                     
+     * @param descricao A descrição do diploma.                      
      * @param habilitacao A habilitação conferida pelo diploma (ex: Bacharel em
      * Engenharia de Software).
      */
-    public Diploma(String criador, CodigoCurso codigoCurso, int paginas, long matricula, String descricao, long autenticacao, String estudante,
+    public Diploma(String criador, CodigoCurso codigoCurso, int paginas, long autenticacao, String estudante, long matricula, String descricao,
             String habilitacao) {
         super(criador, codigoCurso, paginas, autenticacao, estudante, matricula, descricao);
         this.habilitacao = habilitacao;
