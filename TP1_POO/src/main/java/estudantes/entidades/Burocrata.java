@@ -119,7 +119,7 @@ public class Burocrata {
         // 2. Fase de Despacho: Verifica processos na mesa para despacho
         for (Processo proc : mesa.getProcessos()) {
             if ((proc != null) && (proc.pegarCopiaDoProcesso().length > 0)) {
-                boolean processoQuaseCheio = contarPaginasProcesso(proc) > 200;
+                boolean processoQuaseCheio = contarPaginasProcesso(proc) > 245;
 
                 // Verifica Regra 4 (Portaria/Edital substancial)
                 boolean portariaOuEdital = false;
